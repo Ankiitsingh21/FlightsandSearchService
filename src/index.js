@@ -1,7 +1,7 @@
 const express =require('express');
 //require('dotenv').config()
 const bodyparser=require('body-parser');
-
+const { City } = require('./models/index');
 const {PORT} = require('./config/serverconfig');
 const setupandStartServer=async()=>{
    // create the express object
@@ -13,6 +13,7 @@ const setupandStartServer=async()=>{
    
    app.listen(PORT,()=>{
         console.log(`server started at ${PORT}`)
+        console.log(City);
    });
 
 }
