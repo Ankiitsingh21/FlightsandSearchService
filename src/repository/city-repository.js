@@ -27,11 +27,17 @@ class CityRepository{
         }
         async updateCity(cityId, data){
               try{
-                   const city = await City.update(data,{
-                         where:{
-                                id:cityId
-                         }
-                   });
+                   //the below approach also work but will not return the updated object
+                   // if we are using ph=g sql then returning true can be used;
+                   //const city = await City.update(data,{
+                   //      where:{
+                   //             id:cityId
+                   //      }
+                   //});
+                   //return city;
+                   const city=await City.findByPk(cityId);
+                   city.name = data.name;
+                   await city.save();
                    return city;
               }
               catch(error){
@@ -41,7 +47,7 @@ class CityRepository{
         }
         async getCity(cityid){
                 try{
-                     const city = await City.findByPK(cityid);
+                     const city = await City.findByPk(cityid);
                      return city;
                 }
                 catch(error){
