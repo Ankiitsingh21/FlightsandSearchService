@@ -1,9 +1,11 @@
 const express =require('express');
-//require('dotenv').config()
 const bodyparser=require('body-parser');
 
 const {PORT} = require('./config/serverconfig');
 const Apiroutes = require('./routes/index');
+
+const db=require('./models/index');
+//const {City,Airport} =require('./models/index');
 
 const setupandStartServer=async()=>{
    // create the express object
@@ -16,6 +18,10 @@ const setupandStartServer=async()=>{
    
    app.listen(PORT,async ()=>{
         console.log(`server started at ${PORT}`);
+       if(process.env.SYNC_DB){
+         db.sequelize.sync({alter: true});
+       }
+
    });
 
 }
