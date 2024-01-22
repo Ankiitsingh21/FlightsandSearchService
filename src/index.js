@@ -13,6 +13,7 @@ const setupandStartServer=async()=>{
    app.use(bodyparser.urlencoded({extended: true}));
 
    app.use('/api',Apiroutes);
+   
    app.listen(PORT,async ()=>{
         console.log(`server started at ${PORT}`);
    });
