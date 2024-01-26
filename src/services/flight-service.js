@@ -10,14 +10,15 @@ class FlightService{
 
     async createFlight(data){
         try{
-           if(compareTime(data.arrivalTime,data.departureTime)){
-               throw{error : 'Arrival time cannot be less the departure time'};
-           }
-            const airplane = await this.airplaneRepository.getairplane(data.airplaneId);
+            //if(!compareTime(data.arrivalTime,data.departureTime)){
+            //   throw{error : 'Arrival time cannot be less the departure time'};
+            //}
+            const airplane = await this.airplaneRepository.getAirplane(data.airplaneId);
+            //console.log(data,airplane);
             const flight = await this.flightRepository.createFlight({
-                ...data,totalSeats:airplane.capacity,
+                ...data,totalSeats:airplane.capacity
             });
-            return flight ;
+            return flight;
 
         }catch(error){
 
@@ -44,6 +45,5 @@ module.exports  =FlightService
  *  departureTime,
  *  price ,
  *  totalSeats ->airplane
- *  
  * }
  */
